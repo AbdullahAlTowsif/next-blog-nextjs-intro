@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BlogCard from "@/components/modules/Blogs/BlogCard";
+import { Metadata } from "next";
+
+// can use metadata in server component
+export const metadata: Metadata = {
+  title: "All Blogs | Next Blog",
+  description: "Browse all blog post on web development"
+};
 
 const AllBlogsPage = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
