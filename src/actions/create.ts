@@ -1,14 +1,16 @@
 "use server";
 
+import { getUserSession } from "@/helpers/getUserSession";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 
 export const create = async (data: FormData) => {
+    const session = await getUserSession()
     const blogInfo = Object.fromEntries(data.entries()) // converts form data in plain objects
     const modifiedData = {
         ...blogInfo,
-        authorId: 1,
+        authorId: session?.user.id,
         tags: blogInfo.tags.toString().split(",").map(tag => tag.trim()),
         isFeatured: Boolean(blogInfo.isFeatured),
     }
